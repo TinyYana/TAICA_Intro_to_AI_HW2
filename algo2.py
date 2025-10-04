@@ -20,22 +20,28 @@ def simulated_annealing(loss_fn, start_points, field_size, steps=300):
             # 2. Compute the new candidate (nx, ny) and evaluate loss_fn (next_gpa)
             # 3. Compute delta = next_gpa - current_gpa
             # 4. Accept the move if:
-            #       ¡V delta > 0   (improves solution), OR
-            #       ¡V with probability exp(delta / temp)   (explores worse solutions)
+            #       ï¿½V delta > 0   (improves solution), OR
+            #       ï¿½V with probability exp(delta / temp)   (explores worse solutions)
             # 5. Update best state if current_gpa is better than best_gpa
             # 6. Decay the temperature (temp *= decay_rate)
             # ---------------------------------------------------------
 
             # --- IMPLEMENTATION START ---
-            pass
-
-
-
-
-
-
-
-
+            dx = np.random.choice([-step_size, 0, step_size])
+            dy = np.random.choice([-step_size, 0, step_size])
+            nx = x + dx
+            ny = y + dy
+            next_gpa = loss_fn(nx, ny)
+            delta = next_gpa - current_gpa
+            if delta >0:
+                x, y = nx, ny
+                current_gpa = next_gpa
+            else:
+                prob = np.exp(delta / temp)
+                if np.random.rand() < prob:
+                    x, y = nx, ny
+                    current_gpa = next_gpa
+            temp *= temp_decay
 
             # --- IMPLEMENTATION END ---
 
