@@ -1,3 +1,15 @@
 .venv
 __pycache__/
 .DS_Store
+
+# Result
+example_1.txt
+example_10.txt
+optimizer_example_1.gif
+optimizer_example_10.gif
+optimizer1.gif
+optimizer2.gif
+optimizer3.gif
+result1.txt
+result2.txt
+result3.txt
