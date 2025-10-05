@@ -21,7 +21,7 @@ def main():
     min_dist = 3.0
     num_spaceship = 10
     field_size = (-8, 8)
-    fuel_for_movement = 30
+    fuel_for_movement = 300
     start_points = [(np.random.uniform(field_size[0]*0.8, field_size[1]*0.8),
                      np.random.uniform(field_size[0]*0.8, field_size[1]*0.8)) for _ in range(num_spaceship)]
 
