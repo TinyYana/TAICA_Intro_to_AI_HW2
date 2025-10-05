@@ -9,6 +9,7 @@ def ultimate_algorithm(loss_fn, start_points, field_size, steps=300):
         current_gpa = loss_fn(x, y)
         best_x, best_y, best_gpa = x, y, current_gpa
         path = [(x, y, current_gpa, best_x, best_y, best_gpa)]
+        step_size = 0.2
         for _ in range(steps):
             # --- Homework: Implement the Ultimate Algorithm ---
             # You may either:
@@ -32,14 +33,6 @@ def ultimate_algorithm(loss_fn, start_points, field_size, steps=300):
             
             # --- IMPLEMENTATION START ---
             pass
-
-
-
-
-
-
-
-
 
             # --- IMPLEMENTATION END ---
 
