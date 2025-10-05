@@ -28,25 +28,30 @@ def hill_climbing(loss_fn, start_points, field_size, steps=300):
             x, y, current_gpa, best_x, best_y, best_gpa = path[-1]
 
             neighbors = [
-                (x + step_size, y), # 上
-                (x - step_size, y), # 下
-                (x, y + step_size), # 右
-                (x, y - step_size), # 左
-                (x + step_size, y + step_size), # 右上
-                (x + step_size, y - step_size), # 右下
-                (x - step_size, y + step_size), # 左上
-                (x - step_size, y - step_size), # 左下
+                (x + step_size, y),  # 上
+                (x - step_size, y),  # 下
+                (x, y + step_size),  # 右
+                (x, y - step_size),  # 左
+                (x + step_size, y + step_size),  # 右上
+                (x + step_size, y - step_size),  # 右下
+                (x - step_size, y + step_size),  # 左上
+                (x - step_size, y - step_size),  # 左下
             ]
 
             best_nx, best_ny = x, y
             best_ngpa = current_gpa
 
-            for nx, ny in neighbors:
+            for nx, ny in neighbors:  # 遍歷所有鄰居
+                if not (
+                    field_size[0] <= nx <= field_size[1]
+                    and field_size[0] <= ny <= field_size[1]
+                ):  # 檢查鄰居是否在邊界內
+                    continue
                 neighbor_gpa = loss_fn(nx, ny)
                 if neighbor_gpa > best_ngpa:
                     best_nx, best_ny = nx, ny
                     best_ngpa = neighbor_gpa
-            if best_ngpa > current_gpa:
+            if best_ngpa > current_gpa:  # 如果找到更好的鄰居，移動到那裡(程式層面就是取代目前的 x, y, current_gpa)
                 x, y = best_nx, best_ny
                 current_gpa = best_ngpa
             else:
