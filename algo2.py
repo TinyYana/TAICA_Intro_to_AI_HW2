@@ -1,8 +1,10 @@
 import numpy as np
 
+
 def simulated_annealing(loss_fn, start_points, field_size, steps=300):
     starts = np.array(start_points, dtype=float).copy()
     paths = []
+    rng = np.random.default_rng(114514)
 
     for start in starts:
         x, y = start
@@ -25,24 +27,38 @@ def simulated_annealing(loss_fn, start_points, field_size, steps=300):
             # 5. Update best state if current_gpa is better than best_gpa
             # 6. Decay the temperature (temp *= decay_rate)
             # ---------------------------------------------------------
-
             # --- IMPLEMENTATION START ---
-            dx = np.random.choice([-step_size, 0, step_size])
-            dy = np.random.choice([-step_size, 0, step_size])
+            """
+            rng.choice() 的功能是從給定的選項中隨機選擇一個元素。
+            param 1: 要選擇的選項列表(List, Tuple, Array)
+            return: 隨機選擇的元素
+            """
+            dx = rng.choice([-step_size, 0, step_size])
+            dy = rng.choice([-step_size, 0, step_size])
             nx = x + dx
             ny = y + dy
+            """
+            np.clip() 的功能是將輸入的數值限制在指定的範圍內。
+            param 1: 要限制的數值
+            param 2: 最小值
+            param 3: 最大值
+            return: 限制後的數值
+            """
+            nx = np.clip(nx, field_size[0], field_size[1])
+            ny = np.clip(ny, field_size[0], field_size[1])
             next_gpa = loss_fn(nx, ny)
             delta = next_gpa - current_gpa
-            if delta >0:
-                x, y = nx, ny
-                current_gpa = next_gpa
+            accept = False
+            if delta > 0:
+                accept = True
             else:
                 prob = np.exp(delta / temp)
-                if np.random.rand() < prob:
-                    x, y = nx, ny
-                    current_gpa = next_gpa
+                if rng.uniform(0, 1) < prob:
+                    accept = True
+            if accept:
+                x, y = nx, ny
+                current_gpa = next_gpa
             temp *= temp_decay
-
             # --- IMPLEMENTATION END ---
 
             # ------------------------------------------------
