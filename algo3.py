@@ -29,7 +29,6 @@ def ultimate_algorithm(loss_fn, start_points, field_size, steps=30):
         angle = 2 * np.pi * i / max(1, n_ships)
         path = []
 
-        # 先以主程式給的起點初始化（讓動畫顯示從那裡開始）
         sx, sy = start_points[i]
         s_val = loss_fn(sx, sy)
         best_x, best_y, best_gpa = sx, sy, s_val
