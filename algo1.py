@@ -10,7 +10,7 @@ def hill_climbing(loss_fn, start_points, field_size, steps=300):
         current_gpa = loss_fn(x, y)
         best_x, best_y, best_gpa = x, y, current_gpa
         path = [(x, y, current_gpa, best_x, best_y, best_gpa)]
-        step_size = 0.2
+        step_size = 0.3
         for _ in range(steps):
             # --- Homework: Implement Hill Climbing ---------
             # Steps:

@@ -13,7 +13,7 @@ def simulated_annealing(loss_fn, start_points, field_size, steps=300):
         temp_start = 2.0
         path = [(x, y, current_gpa, best_x, best_y, best_gpa, temp_start)]
         temp_decay = 0.8
-        step_size = 0.2
+        step_size = 0.3
         temp = temp_start
         for _ in range(steps):
             # --- Homework algo2: Implement Simulated Annealing ------
